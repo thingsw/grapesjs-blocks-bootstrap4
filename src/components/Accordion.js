@@ -50,7 +50,9 @@ export default (domc) => {
             id: `heading-${pid}-${index}`,
           },
         });
-
+        this.addHeadingComp(heading, pid, index);
+      },
+      addHeadingComp(heading, pid, index) {
         const h = heading.components().add({
           type: 'header',
           tagName: 'h2',
@@ -79,6 +81,9 @@ export default (domc) => {
             id: `collapse-${pid}-${index}`,
           },
         });
+        this.addBodyComp(body, pid, index);
+      },
+      addBodyComp(body, pid, index) {
         body.addAttributes({
           'aria-labelledby': `heading-${pid}-${index}`,
           'data-parent': `#${pid}`,
@@ -88,6 +93,30 @@ export default (domc) => {
           tagName: 'p',
           content: 'Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.',
         });
+      },
+      updated(property, value, prevValue) {
+        if (property === 'components') {
+          const { models } = value;
+          const pid = this.ccid;
+          const headings = models.filter((model) => model.attributes.type === 'accordion-heading');
+          const hindex = headings.length;
+          const bodies = models.filter((model) => model.attributes.type === 'accordion-body');
+          const bindex = bodies.length;
+          const foundH = headings.find((h) => h.attributes.attributes.id === undefined);
+          const foundB = bodies.find((h) => h.attributes.attributes.id === undefined);
+          if (foundH) {
+            foundH.addAttributes({
+              id: `heading-${pid}-${hindex}`,
+            });
+            this.addHeadingComp(foundH, pid, hindex);
+          }
+          if (foundB) {
+            foundB.addAttributes({
+              id: `collapse-${pid}-${bindex}`,
+            });
+            this.addBodyComp(foundB, pid, bindex);
+          }
+        }
       },
     }, {
       isComponent(el) {

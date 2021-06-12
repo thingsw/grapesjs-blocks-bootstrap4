@@ -9,7 +9,7 @@ export const AccordionBodyBlock = (bm, label) => {
     category: 'Components',
     content: {
       type: 'accordion-body',
-      content: 'Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.',
+      content: '<div></div>',
     },
   });
 };
