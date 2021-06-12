@@ -33,9 +33,6 @@ export default (domc) => {
         droppable: false,
         tagName: 'div',
         classes: ['accordion-heading'],
-        attributes: {
-          id: 'headingOne',
-        },
         traits: [
           {
             type: 'text',

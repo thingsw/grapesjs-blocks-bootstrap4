@@ -7,7 +7,10 @@ export const ButtonBlock = (bm, label) => {
   bm.add('button', {
     label: `${buttonIcon}<div>${label}</div>`,
     category: 'Forms',
-    content: '<button class="btn btn-primary">Send</button>',
+    content: {
+      type: 'button',
+      content: 'Send',
+    },
   });
 };
 
@@ -22,10 +25,11 @@ export default (dc) => {
         ...defaultModel.prototype.defaults,
         'custom-name': 'Button',
         droppable: false,
+        tagName: 'button',
         attributes: {
-          role: 'button'
+          role: 'button',
         },
-        classes: ['btn'],
+        classes: ['btn', 'btn-primary'],
         traits: [
           {
             type: 'content',

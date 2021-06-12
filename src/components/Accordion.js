@@ -26,17 +26,75 @@ export default (domc) => {
         'custom-name': 'Accordion',
         tagName: 'div',
         classes: ['accordion'],
-        attributes: {
-          id: 'accordionExample',
-        },
         traits: [
         ].concat(defaultModel.prototype.defaults.traits),
+      },
+      init2() {
+        const children = this.components();
+        if (children.length === 0) {
+          this.addAttributes({ id: this.ccid });
+          this.createHeading(this.ccid, 1);
+          this.createBody(this.ccid, 1);
+          this.createHeading(this.ccid, 2);
+          this.createBody(this.ccid, 2);
+          this.createHeading(this.ccid, 3);
+          this.createBody(this.ccid, 3);
+        }
+      },
+      createHeading(pid, index) {
+        const children = this.components();
+        const heading = children.add({
+          type: 'accordion-heading',
+          classes: ['accordion-heading'],
+          attributes: {
+            id: `heading-${pid}-${index}`,
+          },
+        });
+
+        const h = heading.components().add({
+          type: 'header',
+          tagName: 'h2',
+          classes: ['mb-0'],
+        }).components();
+
+        h.add({
+          type: 'button',
+          tagName: 'button',
+          classes: ['btn', 'btn-link', 'btn-block', 'text-left'],
+          content: `Collapsible Group Item #${index}`,
+          attributes: {
+            'data-toggle': 'collapse',
+            'aria-expanded': 'true',
+            'data-target': `#collapse-${pid}-${index}`,
+            'aria-controls': `collapse-${pid}-${index}`,
+          },
+        });
+      },
+      createBody(pid, index) {
+        const children = this.components();
+        const body = children.add({
+          type: 'accordion-body',
+          classes: ['accordion-body', 'collapse', index === 1 ? 'show' : undefined],
+          attributes: {
+            id: `collapse-${pid}-${index}`,
+          },
+        });
+        body.addAttributes({
+          'aria-labelledby': `heading-${pid}-${index}`,
+          'data-parent': `#${pid}`,
+        });
+        body.components().add({
+          type: 'paragraph',
+          tagName: 'p',
+          content: 'Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.',
+        });
       },
     }, {
       isComponent(el) {
         if (el && el.classList && el.classList.contains('accordion')) {
           return { type: 'accordion' };
         }
+        return undefined;
       },
     }),
     view: defaultView,

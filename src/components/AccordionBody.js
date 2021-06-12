@@ -28,11 +28,6 @@ export default (domc) => {
         droppable: true,
         tagName: 'div',
         classes: ['accordion-body', 'collapse'],
-        attributes: {
-          id: 'collapseOne',
-          'aria-labelledby': 'headingOne',
-          'data-parent': '#accordionExample',
-        },
         traits: [
           {
             type: 'text',
