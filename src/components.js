@@ -1,43 +1,54 @@
-import Collapse, {CollapseBlock} from './components/Collapse';
-import Dropdown, {DropDownBlock} from './components/Dropdown';
-import TabsNavigation, {TabsBlock} from "./components/tabs/TabsNavigation";
-import TabsPanes from "./components/tabs/TabsPanes";
-import Tab from "./components/tabs/Tab";
-import TabPane from "./components/tabs/TabPane";
-import Form, {FormBlock} from "./components/Form";
-import Input, {InputBlock} from "./components/Input";
-import InputGroup, {InputGroupBlock} from "./components/InputGroup";
-import Textarea, {TextareaBlock} from "./components/Textarea";
-import Select, {SelectBlock} from "./components/Select";
-import Checkbox, {CheckboxBlock} from "./components/Checkbox";
-import Radio, {RadioBlock} from "./components/Radio";
-import Button, {ButtonBlock} from "./components/Button";
-import ButtonGroup, {ButtonGroupBlock} from "./components/ButtonGroup";
-import ButtonToolbar, {ButtonToolbarBlock} from "./components/ButtonToolbar";
-import Label, {LabelBlock} from "./components/Label";
-import Link, {LinkBlock} from "./components/Link";
-import FileInput, {FileInputBlock} from "./components/FileInput";
-import Image, {ImageBlock} from "./components/Image";
-import Video, {VideoBlock} from "./components/video/Video";
-import Embed from "./components/video/Embed";
-import Paragraph, {ParagraphBlock} from "./components/Paragraph";
-import Header, {HeaderBlock} from "./components/Header";
-import Card, {CardBlock} from "./components/Card";
-import Badge, {BadgeBlock} from "./components/Badge";
-import Alert, {AlertBlock} from "./components/Alert";
-import MediaObject, {MediaObjectBlock} from "./components/MediaObject";
-import ColumnBreak, {ColumnBreakBlock} from "./components/ColumnBreak";
-import Column, {ColumnBlock} from "./components/Column";
-import Row, {RowBlock} from "./components/Row";
-import Container, {ContainerBlock} from "./components/Container";
-import Text, {TextBlock} from "./components/Text";
-import Default from "./components/Default";
+import Collapse, { CollapseBlock } from './components/Collapse';
+import Dropdown, { DropDownBlock } from './components/Dropdown';
+import TabsNavigation, { TabsBlock } from './components/tabs/TabsNavigation';
+import TabsPanes from './components/tabs/TabsPanes';
+import Tab from './components/tabs/Tab';
+import TabPane from './components/tabs/TabPane';
+import Form, { FormBlock } from './components/Form';
+import Input, { InputBlock } from './components/Input';
+import InputGroup, { InputGroupBlock } from './components/InputGroup';
+import Textarea, { TextareaBlock } from './components/Textarea';
+import Select, { SelectBlock } from './components/Select';
+import Checkbox, { CheckboxBlock } from './components/Checkbox';
+import Radio, { RadioBlock } from './components/Radio';
+import AnchorButton, { AnchorButtonBlock } from './components/AnchorButton';
+import Button, { ButtonBlock } from './components/Button';
+import ButtonGroup, { ButtonGroupBlock } from './components/ButtonGroup';
+import ButtonToolbar, { ButtonToolbarBlock } from './components/ButtonToolbar';
+import Label, { LabelBlock } from './components/Label';
+import Link, { LinkBlock } from './components/Link';
+import FileInput, { FileInputBlock } from './components/FileInput';
+import Image, { ImageBlock } from './components/Image';
+import Video, { VideoBlock } from './components/video/Video';
+import Embed from './components/video/Embed';
+import Paragraph, { ParagraphBlock } from './components/Paragraph';
+import Header, { HeaderBlock } from './components/Header';
+import Card, { CardBlock } from './components/Card';
+import Badge, { BadgeBlock } from './components/Badge';
+import Alert, { AlertBlock } from './components/Alert';
+import MediaObject, { MediaObjectBlock } from './components/MediaObject';
+import ColumnBreak, { ColumnBreakBlock } from './components/ColumnBreak';
+import Column, { ColumnBlock } from './components/Column';
+import Row, { RowBlock } from './components/Row';
+import Container, { ContainerBlock } from './components/Container';
+import Text, { TextBlock } from './components/Text';
+import Accordion, { AccordionBlock } from './components/Accordion';
+import AccordionItem, { AccordionItemBlock } from './components/AccordionItem';
+import AccordionHeading, { AccordionHeadingBlock } from './components/AccordionHeading';
+import AccordionBody, { AccordionBodyBlock } from './components/AccordionBody';
+import Table, { TableBlock } from './components/Table';
+import TableBody, { TableBodyBlock } from './components/TableBody';
+import TableHead, { TableHeadBlock } from './components/TableHead';
+import TableRow, { TableRowBlock } from './components/TableRow';
+import TableCellHead, { TableCellHeadBlock } from './components/TableCellHead';
+import TableCell, { TableCellBlock } from './components/TableCell';
 
+import Default from './components/Default';
 
 export default (editor, config = {}) => {
   const c = config;
   const domc = editor.DomComponents;
-  const blocks = c.blocks;
+  const { blocks } = c;
   const bm = editor.BlockManager;
   const cats = c.blockCategories;
 
@@ -71,8 +82,8 @@ export default (editor, config = {}) => {
       label: c.labels.trait_checked,
       type: 'checkbox',
       name: 'checked',
-      changeProp: 1
-    }
+      changeProp: 1,
+    },
   };
 
   if (cats.media) {
@@ -107,14 +118,13 @@ export default (editor, config = {}) => {
     }
 
     // Basic
-    /*if (blocks.list) {
+    /* if (blocks.list) {
       ListBlock(bm, c.labels.list)
       List(domc);
-    }*/
+    } */
 
-    /*if (blocks.description_list) {
-    }*/
-
+    /* if (blocks.description_list) {
+    } */
   }
 
   // LAYOUT
@@ -149,6 +159,26 @@ export default (editor, config = {}) => {
       Alert(domc);
     }
 
+    if (blocks.accordion) {
+      AccordionBlock(bm, c.labels.accordion);
+      Accordion(domc);
+    }
+
+    if (blocks.accordion_item) {
+      AccordionItemBlock(bm, c.labels.accordion_item);
+      AccordionItem(domc);
+    }
+
+    if (blocks.accordion_heading) {
+      AccordionHeadingBlock(bm, c.labels.accordion_heading);
+      AccordionHeading(domc);
+    }
+
+    if (blocks.accordion_body) {
+      AccordionBodyBlock(bm, c.labels.accordion_body);
+      AccordionBody(domc);
+    }
+
     if (blocks.tabs) {
       TabsBlock(bm, c);
       TabsNavigation(domc, config);
@@ -180,7 +210,6 @@ export default (editor, config = {}) => {
       DropDownBlock(bm, c.labels.dropdown);
       Dropdown(editor);
     }
-
   }
 
   // TYPOGRAPHY
@@ -195,7 +224,7 @@ export default (editor, config = {}) => {
     }
   }
 
-  if(cats.forms) {
+  if (cats.forms) {
     if (blocks.form) {
       FormBlock(bm, c.labels.form);
       Form(domc, traits, config);
@@ -239,6 +268,11 @@ export default (editor, config = {}) => {
       Label(domc, traits, config);
     }
 
+    if (blocks.anchor_button) {
+      AnchorButtonBlock(bm, c.labels.anchor_button);
+      AnchorButton(editor);
+    }
+
     if (blocks.button) {
       ButtonBlock(bm, c.labels.button);
       Button(domc);
@@ -255,4 +289,30 @@ export default (editor, config = {}) => {
     }
   }
 
-}
+  if (cats.table) {
+    if (blocks.table) {
+      TableBlock(bm, c.labels.table);
+      Table(domc);
+    }
+    if (blocks.table_body) {
+      TableBodyBlock(bm, c.labels.table_body);
+      TableBody(domc);
+    }
+    if (blocks.table_head) {
+      TableHeadBlock(bm, c.labels.table_head);
+      TableHead(domc);
+    }
+    if (blocks.table_row) {
+      TableRowBlock(bm, c.labels.table_row);
+      TableRow(domc);
+    }
+    if (blocks.table_cell_head) {
+      TableCellHeadBlock(bm, c.labels.table_cell_head);
+      TableCellHead(domc);
+    }
+    if (blocks.table_cell) {
+      TableCellBlock(bm, c.labels.table_cell);
+      TableCell(domc);
+    }
+  }
+};

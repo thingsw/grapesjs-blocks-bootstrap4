@@ -8,7 +8,7 @@
     "v:patch": "npm version --no-git-tag-version patch",
     "v:minor": "npm version --no-git-tag-version minor",
     "build": "npm run v:patch && webpack --env production",
-    "build-dev": "npm run && webpack --env production",
+    "build-dev": "webpack --watch --env production",
     "start": "webpack-cli serve --mode development --progress"
   },
   "repository": {

@@ -7,12 +7,18 @@ import loadDevices from './devices';
 const loadCss = editor => {
   editor.Config.canvasCss += `
     /* Layout */
-
     .gjs-dashed .container, .gjs-dashed .container-fluid,
     .gjs-dashed .row,
-    .gjs-dashed .col, .gjs-dashed [class^="col-"] {
+    .gjs-dashed .col, 
+    .gjs-dashed .accordion, 
+    .gjs-dashed [class^="col-"] {
       min-height: 1.5rem !important;
     }
+    .gjs-dashed .table > div,
+    .gjs-dashed [class^="table-"] > div {
+      height: 1.5rem !important;
+    }
+
     .gjs-dashed .w-100 {
       min-height: .25rem !important;
       background-color: rgba(0,0,0,0.1);
@@ -73,8 +79,12 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     media_object: true,
     // COMPONENTS
     alert: true,
+    accordion: true,
+    accordion_heading: true,
+    accordion_body: true,
     tabs: true,
     badge: true,
+    anchor_button: true,
     button: true,
     button_group: true,
     button_toolbar: true,
@@ -98,6 +108,13 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     label: true,
     checkbox: true,
     radio: true,
+    // TABLE
+    table: true,
+    table_head: true,
+    table_body: true,
+    table_row: true,
+    table_cell: true,
+    table_cell_head: true,
   };
 
   const default_labels = {
@@ -110,10 +127,14 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
 
     // COMPONENTS
     alert: 'Alert',
+    accordion: 'Accordion',
+    accordion_heading: 'Accordion Heading',
+    accordion_body: 'Accordion Body',
     tabs: 'Tabs',
     tab: 'Tab',
     tabPane: 'Tab Pane',
     badge: 'Badge',
+    anchor_button: 'Anchor Button',
     button: 'Button',
     button_group: 'Button Group',
     button_toolbar: 'Button Toolbar',
@@ -173,6 +194,14 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     type_submit: 'Submit',
     type_reset: 'Reset',
     type_button: 'Button',
+
+    // TABLE
+    table: 'Table',
+    table_head: 'Table Head',
+    table_body: 'Table Body',
+    table_row: 'Table Row',
+    table_cell_head: 'Table Cell Head',
+    table_cell: 'Table Cell',
   };
 
   const default_categories = {
@@ -182,20 +211,23 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     'typography': true,
     'basic': true,
     'forms': true,
+    'table': true,
   };
 
-  let options = { ...{
-    blocks: Object.assign(default_blocks, opts_blocks),
-    labels: Object.assign(default_labels, opts_labels),
-    blockCategories: Object.assign(default_categories, opts_categories),
-    optionsStringSeparator: '::',
-    gridDevices: true,
-    gridDevicesPanel: false,
-    classNavigation: 'nav',
-    classTabPanes: 'tab-content',
-    classTabPane: 'tab-pane',
-    classTab: 'nav-item',
-  },  ...opts };
+  let options = {
+    ...{
+      blocks: Object.assign(default_blocks, opts_blocks),
+      labels: Object.assign(default_labels, opts_labels),
+      blockCategories: Object.assign(default_categories, opts_categories),
+      optionsStringSeparator: '::',
+      gridDevices: true,
+      gridDevicesPanel: false,
+      classNavigation: 'nav',
+      classTabPanes: 'tab-content',
+      classTabPane: 'tab-pane',
+      classTab: 'nav-item',
+    }, ...opts
+  };
 
   // Add components
   loadCommands(editor, options);
