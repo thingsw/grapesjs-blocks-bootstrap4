@@ -1,16 +1,16 @@
-import exclamationIcon from 'raw-loader!../icons/table_rows.svg';
+import exclamationIcon from 'raw-loader!../../icons/table_rows.svg';
 
-export const TableRowBlock = (bm, label) => {
-  bm.add('table-row', {
+export const TableHeadBlock = (bm, label) => {
+  bm.add('table-head', {
     label: `
             ${exclamationIcon}
             <div>${label}</div>
         `,
     category: 'Table',
     content: {
-      type: 'table-row',
-      classes: ['table-row'],
-      content: '<tr></tr>'
+      type: 'table-head',
+      classes: ['table-head'],
+      content: '<thead></thead>'
     },
   });
 };
@@ -20,21 +20,21 @@ export default (domc) => {
   const defaultModel = defaultType.model;
   const defaultView = defaultType.view;
 
-  domc.addType('table-row', {
+  domc.addType('table-head', {
     model: defaultModel.extend({
       defaults: {
         ...defaultModel.prototype.defaults,
-        'custom-name': 'Table Row',
-        draggable: '.thead,.tbody',
+        'custom-name': 'Table Head',
+        draggable: '.table',
         droppable: true,
-        tagName: 'tr',
+        tagName: 'thead',
         traits: [
         ].concat(defaultModel.prototype.defaults.traits),
       },
     }, {
       isComponent(el) {
-        if (el && el.tagName === 'TR' && el.classList && el.classList.contains('table-row')) {
-          return { type: 'table-row' };
+        if (el && el.tagName === 'THEAD' && el.classList && el.classList.contains('table-head')) {
+          return { type: 'table-head' };
         }
       },
     }),

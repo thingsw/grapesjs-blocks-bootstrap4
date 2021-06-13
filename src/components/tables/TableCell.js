@@ -1,16 +1,16 @@
-import exclamationIcon from 'raw-loader!../icons/table_rows.svg';
+import exclamationIcon from 'raw-loader!../../icons/table_rows.svg';
 
-export const TableCellHeadBlock = (bm, label) => {
-  bm.add('table-cell-head', {
+export const TableCellBlock = (bm, label) => {
+  bm.add('table-cell', {
     label: `
             ${exclamationIcon}
             <div>${label}</div>
         `,
     category: 'Table',
     content: {
-      type: 'table-cell-head',
-      classes: ['table-cell-head'],
-      content: '<th></th>'
+      type: 'table-cell',
+      classes: ['table-cell'],
+      content: '<td></td>'
     },
   });
 };
@@ -20,14 +20,14 @@ export default (domc) => {
   const defaultModel = defaultType.model;
   const defaultView = defaultType.view;
 
-  domc.addType('table-cell-head', {
+  domc.addType('table-cell', {
     model: defaultModel.extend({
       defaults: {
         ...defaultModel.prototype.defaults,
-        'custom-name': 'Table Cell Head',
+        'custom-name': 'Table Cell',
         draggable: '.tr',
         droppable: true,
-        tagName: 'th',
+        tagName: 'td',
         traits: [
           {
             type: 'text',
@@ -43,8 +43,8 @@ export default (domc) => {
       },
     }, {
       isComponent(el) {
-        if (el && el.tagName === 'TH' && el.classList && el.classList.contains('table-cell-head')) {
-          return { type: 'table-cell-head' };
+        if (el && el.tagName === 'TD' && el.classList && el.classList.contains('table-cell')) {
+          return { type: 'table-cell' };
         }
       },
     }),

@@ -1,4 +1,4 @@
-import exclamationIcon from 'raw-loader!../icons/accordion.svg';
+import exclamationIcon from 'raw-loader!../../icons/accordion.svg';
 
 export const AccordionBodyBlock = (bm, label) => {
   bm.add('accordion-body', {

@@ -82,7 +82,6 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     accordion: true,
     accordion_heading: true,
     accordion_body: true,
-    tabs: true,
     badge: true,
     anchor_button: true,
     button: true,
@@ -115,6 +114,10 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     table_row: true,
     table_cell: true,
     table_cell_head: true,
+    // TABS
+    tabs: true,
+    // Carousel
+    carousel: true,
   };
 
   const default_labels = {
@@ -130,9 +133,6 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     accordion: 'Accordion',
     accordion_heading: 'Accordion Heading',
     accordion_body: 'Accordion Body',
-    tabs: 'Tabs',
-    tab: 'Tab',
-    tabPane: 'Tab Pane',
     badge: 'Badge',
     anchor_button: 'Anchor Button',
     button: 'Button',
@@ -202,16 +202,28 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     table_row: 'Table Row',
     table_cell_head: 'Table Cell Head',
     table_cell: 'Table Cell',
+
+    // TABS
+    tabs: 'Tabs',
+    vtabs: 'Vertical Tabs',
+    tab: 'Tab',
+    tab_pane: 'Tab Pane',
+
+    // CAROUSEL
+    carousel: 'Carousel',
+    carousel_item: 'Carousel Item',
   };
 
   const default_categories = {
-    'layout': true,
-    'media': true,
-    'components': true,
-    'typography': true,
-    'basic': true,
-    'forms': true,
-    'table': true,
+    layout: true,
+    media: true,
+    components: true,
+    typography: true,
+    basic: true,
+    forms: true,
+    table: true,
+    tabs: true,
+    carousel: true,
   };
 
   let options = {

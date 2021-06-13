@@ -1,4 +1,4 @@
-import exclamationIcon from 'raw-loader!../icons/table_rows.svg';
+import exclamationIcon from 'raw-loader!../../icons/table_rows.svg';
 
 export const TableBlock = (bm, label) => {
   bm.add('table', {

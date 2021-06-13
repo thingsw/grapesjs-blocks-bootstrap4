@@ -1,9 +1,5 @@
 import Collapse, { CollapseBlock } from './components/Collapse';
 import Dropdown, { DropDownBlock } from './components/Dropdown';
-import TabsNavigation, { TabsBlock } from './components/tabs/TabsNavigation';
-import TabsPanes from './components/tabs/TabsPanes';
-import Tab from './components/tabs/Tab';
-import TabPane from './components/tabs/TabPane';
 import Form, { FormBlock } from './components/Form';
 import Input, { InputBlock } from './components/Input';
 import InputGroup, { InputGroupBlock } from './components/InputGroup';
@@ -32,16 +28,27 @@ import Column, { ColumnBlock } from './components/Column';
 import Row, { RowBlock } from './components/Row';
 import Container, { ContainerBlock } from './components/Container';
 import Text, { TextBlock } from './components/Text';
-import Accordion, { AccordionBlock } from './components/Accordion';
-import AccordionItem, { AccordionItemBlock } from './components/AccordionItem';
-import AccordionHeading, { AccordionHeadingBlock } from './components/AccordionHeading';
-import AccordionBody, { AccordionBodyBlock } from './components/AccordionBody';
-import Table, { TableBlock } from './components/Table';
-import TableBody, { TableBodyBlock } from './components/TableBody';
-import TableHead, { TableHeadBlock } from './components/TableHead';
-import TableRow, { TableRowBlock } from './components/TableRow';
-import TableCellHead, { TableCellHeadBlock } from './components/TableCellHead';
-import TableCell, { TableCellBlock } from './components/TableCell';
+import Accordion, { AccordionBlock } from './components/Accordion/Accordion';
+import AccordionHeading, { AccordionHeadingBlock } from './components/Accordion/AccordionHeading';
+import AccordionBody, { AccordionBodyBlock } from './components/Accordion/AccordionBody';
+import Table, { TableBlock } from './components/tables/Table';
+import TableBody, { TableBodyBlock } from './components/tables/TableBody';
+import TableHead, { TableHeadBlock } from './components/tables/TableHead';
+import TableRow, { TableRowBlock } from './components/tables/TableRow';
+import TableCellHead, { TableCellHeadBlock } from './components/tables/TableCellHead';
+import TableCell, { TableCellBlock } from './components/tables/TableCell';
+import VerticalTabs, { VerticalTabsBlock } from './components/tab/VerticalTabs';
+import Tabs, { TabsBlock } from './components/tab/Tabs';
+import TabsNavigation from './components/tab/TabsNavigation';
+import Tab, { TabBlock } from './components/tab/Tab';
+import TabPanels from './components/tab/TabPanels';
+import TabPanel, { TabPanelBlock } from './components/tab/TabPanel';
+import Carousel, { CarouselBlock } from './components/carousel/Carousel';
+import CarouselIndicators from './components/carousel/CarouselIndicators';
+import CarouselIndicator from './components/carousel/CarouselIndicator';
+import CarouselInner from './components/carousel/CarouselInner';
+import CarouselControl from './components/carousel/CarouselControl';
+import CarouselItem, { CarouselItemBlock } from './components/carousel/CarouselItem';
 
 import Default from './components/Default';
 
@@ -164,11 +171,6 @@ export default (editor, config = {}) => {
       Accordion(domc);
     }
 
-    if (blocks.accordion_item) {
-      AccordionItemBlock(bm, c.labels.accordion_item);
-      AccordionItem(domc);
-    }
-
     if (blocks.accordion_heading) {
       AccordionHeadingBlock(bm, c.labels.accordion_heading);
       AccordionHeading(domc);
@@ -179,13 +181,13 @@ export default (editor, config = {}) => {
       AccordionBody(domc);
     }
 
-    if (blocks.tabs) {
-      TabsBlock(bm, c);
-      TabsNavigation(domc, config);
-      Tab(domc, config);
-      TabsPanes(domc, config);
-      TabPane(domc, config);
-    }
+    // if (blocks.tabs) {
+    //   // TabsBlock(bm, c);
+    //   // TabsNavigation(domc, config);
+    //   // Tab(domc, config);
+    //   // TabsPanes(domc, config);
+    //   // TabPane(domc, config);
+    // }
 
     // Badge
     if (blocks.badge) {
@@ -313,6 +315,34 @@ export default (editor, config = {}) => {
     if (blocks.table_cell) {
       TableCellBlock(bm, c.labels.table_cell);
       TableCell(domc);
+    }
+  }
+
+  if (cats.tabs) {
+    if (blocks.tabs) {
+      TabsBlock(bm, c.labels.tabs);
+      Tabs(domc);
+      VerticalTabsBlock(bm, c.labels.vtabs);
+      VerticalTabs(domc);
+      TabsNavigation(domc);
+      TabBlock(bm, c.labels.tab);
+      Tab(domc);
+      TabPanels(domc);
+      TabPanelBlock(bm, c.labels.tab_pane);
+      TabPanel(domc);
+    }
+  }
+
+  if (cats.carousel) {
+    if (blocks.carousel) {
+      CarouselBlock(bm, c.labels.carousel);
+      Carousel(domc);
+      CarouselIndicators(domc);
+      CarouselIndicator(domc);
+      CarouselInner(domc);
+      CarouselItemBlock(bm, c.labels.carousel_item);
+      CarouselItem(domc);
+      CarouselControl(domc);
     }
   }
 };

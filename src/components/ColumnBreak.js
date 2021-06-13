@@ -27,8 +27,8 @@ export default (domc) => {
             })
         }, {
             isComponent(el) {
-                if(el && el.classList && el.classList.contains('w-100')) { // also check if parent is `.row`
-                    return {type: 'column_break'};
+                if (el && el.tagName === 'DIV' && el.classList && el.classList.contains('w-100')) { // also check if parent is `.row`
+                    return { type: 'column_break' };
                 }
             }
         }),
