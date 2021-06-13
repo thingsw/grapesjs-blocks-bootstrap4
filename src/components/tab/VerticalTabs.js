@@ -28,11 +28,18 @@ export default (domc) => {
         droppable: true,
         tagName: 'div',
         traits: [
+          {
+            type: 'number',
+            label: 'The number of tabs',
+            name: 'tabs-count',
+            changeProp: 1,
+          },
         ].concat(defaultModel.prototype.defaults.traits),
       },
       init2() {
         const children = this.components();
         if (children.length === 0) {
+          const pid = this.ccid;
           const row = children.add({
             type: 'row',
             classes: ['row'],
@@ -45,28 +52,49 @@ export default (domc) => {
             type: 'column',
             classes: ['col-9', 'border'],
           }).components();
-          this.createTabsNavigation(col1, this.ccid);
-          this.crateTabPanels(col2, this.ccid);
+
+          this.navigation = col1.add({
+            type: 'tabs-navigation',
+            classes: ['nav', 'flex-column', 'nav-pills'],
+            attributes: {
+              id: `tab-${pid}`,
+              role: 'tablist',
+              'aria-orientation': 'vertical',
+            },
+          });
+          this.createTab(pid, 1);
+          this.createTab(pid, 2);
+          this.createTab(pid, 3);
+
+          this.panels = col2.add({
+            type: 'tabs-panels',
+            attributes: {
+              id: `tab-panel-content-${pid}`,
+            },
+          });
+
+          this.createTabPanel(pid, 1);
+          this.createTabPanel(pid, 2);
+          this.createTabPanel(pid, 3);
+        } else {
+          this.panels = this.findType('tabs-panels')[0];
+          this.navigation = this.findType('tabs-navigation')[0];
+        }
+        this.listenTo(this, 'change:tabs-count', this.updateTabs);
+      },
+      updateTabs() {
+        const count = this.get('tabs-count');
+        const currLength = this.panels.components().length;
+
+        if (currLength < count) {
+          for (let i = currLength + 1; i <= count; i++) {
+            this.createTab(this.ccid, i);
+            this.createTabPanel(this.ccid, i);
+          }
         }
       },
-      crateTabPanels(col, pid) {
-        const panels = col.add({
-          type: 'tabs-panels',
-          attributes: {
-            id: `tab-panel-content-${pid}`,
-          },
-        }).components();
-        this.createTabPanel(panels, pid, 1);
-        this.createTabPanel(panels, pid, 2);
-        this.createTabPanel(panels, pid, 3);
-        this.createTabPanel(panels, pid, 4);
-        this.createTabPanel(panels, pid, 5);
-        this.createTabPanel(panels, pid, 6);
-        this.createTabPanel(panels, pid, 7);
-        this.createTabPanel(panels, pid, 8);
-      },
-      createTabPanel(panels, pid, index) {
-        const panel = panels.add({
+      createTabPanel(pid, index) {
+        const panel = this.panels.components().add({
           type: 'tabs-panel',
         });
         panel.addAttributes({
@@ -81,27 +109,8 @@ export default (domc) => {
           content: 'Placeholder content for the tab panel.',
         });
       },
-      createTabsNavigation(col, pid) {
-        const nav = col.add({
-          type: 'tabs-navigation',
-          classes: ['nav', 'flex-column', 'nav-pills'],
-          attributes: {
-            id: `tab-${pid}`,
-            role: 'tablist',
-            'aria-orientation': 'vertical',
-          },
-        }).components();
-        this.createTab(nav, pid, 1);
-        this.createTab(nav, pid, 2);
-        this.createTab(nav, pid, 3);
-        this.createTab(nav, pid, 4);
-        this.createTab(nav, pid, 5);
-        this.createTab(nav, pid, 6);
-        this.createTab(nav, pid, 7);
-        this.createTab(nav, pid, 8);
-      },
-      createTab(nav, pid, index) {
-        const tab = nav.add({
+      createTab(pid, index) {
+        const tab = this.navigation.components().add({
           type: 'tabs-tab',
         }).components();
         tab.add({
@@ -117,30 +126,6 @@ export default (domc) => {
           },
           content: `Tab #${index}`,
         });
-      },
-      updated(property, value, prevValue) {
-        if (property === 'components') {
-          const { models } = value;
-          const pid = this.ccid;
-          const headings = models.filter((model) => model.attributes.type === 'tabs-tab');
-          const hindex = headings.length;
-          const bodies = models.filter((model) => model.attributes.type === 'tabs-panel');
-          const bindex = bodies.length;
-          const foundH = headings.find((h) => h.attributes.attributes.id === undefined);
-          const foundB = bodies.find((h) => h.attributes.attributes.id === undefined);
-          if (foundH) {
-            foundH.addAttributes({
-              id: `tab-${pid}-${hindex}`,
-            });
-            this.createTab(foundH, pid, hindex);
-          }
-          if (foundB) {
-            foundB.addAttributes({
-              id: `tab-panel-${pid}-${bindex}`,
-            });
-            this.createTabPanel(foundB, pid, bindex);
-          }
-        }
       },
     }, {
       isComponent(el) {

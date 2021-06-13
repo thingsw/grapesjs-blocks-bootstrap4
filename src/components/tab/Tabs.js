@@ -130,30 +130,6 @@ export default (domc) => {
           content: `Tab #${index}`,
         });
       },
-      updated(property, value, prevValue) {
-        if (property === 'components') {
-          const { models } = value;
-          const pid = this.ccid;
-          const headings = models.filter((model) => model.attributes.type === 'tabs-tab');
-          const hindex = headings.length;
-          const bodies = models.filter((model) => model.attributes.type === 'tabs-panel');
-          const bindex = bodies.length;
-          const foundH = headings.find((h) => h.attributes.attributes.id === undefined);
-          const foundB = bodies.find((h) => h.attributes.attributes.id === undefined);
-          if (foundH) {
-            foundH.addAttributes({
-              id: `tab-${pid}-${hindex}`,
-            });
-            this.createTab(foundH, pid, hindex);
-          }
-          if (foundB) {
-            foundB.addAttributes({
-              id: `tab-panel-${pid}-${bindex}`,
-            });
-            this.createTabPanel(foundB, pid, bindex);
-          }
-        }
-      },
     }, {
       isComponent(el) {
         if (el && el.tagName === 'DIV' && el.classList && el.classList.contains('tabs')) {
