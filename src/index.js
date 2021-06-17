@@ -19,6 +19,17 @@ const loadCss = editor => {
       height: 1.5rem !important;
     }
 
+    .gjs-dashed .carousel.show .carousel-item {
+      display: block;
+      margin-right: 0;
+    }
+
+    .gjs-dashed .tabs-vertical.show .tab-pane,
+    .gjs-dashed .tabs.show .tab-pane {
+      display: block;
+      opacity: 1;
+    }
+
     .gjs-dashed .w-100 {
       min-height: .25rem !important;
       background-color: rgba(0,0,0,0.1);
