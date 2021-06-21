@@ -24,6 +24,12 @@ const loadCss = editor => {
       margin-right: 0;
     }
 
+    .gjs-dashed .swiper-container.show .swiper-wrapper {
+      transform: none!important;
+      display: flex;
+      flex-direction: column;
+    }
+
     .gjs-dashed .tabs-vertical.show .tab-pane,
     .gjs-dashed .tabs.show .tab-pane {
       display: block;
@@ -103,6 +109,9 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     collapse: true,
     dropdown: true,
     video: true,
+    video2: true,
+    iframe2: true,
+    youtube_thumb: true,
     // TYPOGRAPHY
     header: true,
     paragraph: true,
@@ -129,6 +138,8 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     tabs: true,
     // Carousel
     carousel: true,
+    // swiper
+    swiper: true,
   };
 
   const default_labels = {
@@ -159,6 +170,9 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     // MEDIA
     image: 'Image',
     video: 'Video',
+    video2: 'Video2',
+    iframe2: 'iFrame2',
+    youtube_thumb: 'Yotube Thumbnail',
 
     // TYPOGRAPHY
     text: 'Text',
@@ -223,6 +237,10 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     // CAROUSEL
     carousel: 'Carousel',
     carousel_item: 'Carousel Item',
+
+    // swiper
+    swiper_container: 'Swiper Container',
+    swiper_slide: 'Swiper Slide',
   };
 
   const default_categories = {
@@ -235,6 +253,7 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     table: true,
     tabs: true,
     carousel: true,
+    swiper: true,
   };
 
   let options = {

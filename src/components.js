@@ -15,8 +15,6 @@ import Label, { LabelBlock } from './components/Label';
 import Link, { LinkBlock } from './components/Link';
 import FileInput, { FileInputBlock } from './components/FileInput';
 import Image, { ImageBlock } from './components/Image';
-import Video, { VideoBlock } from './components/video/Video';
-import Embed from './components/video/Embed';
 import Paragraph, { ParagraphBlock } from './components/Paragraph';
 import Header, { HeaderBlock } from './components/Header';
 import Card, { CardBlock } from './components/Card';
@@ -49,6 +47,15 @@ import CarouselIndicator from './components/carousel/CarouselIndicator';
 import CarouselInner from './components/carousel/CarouselInner';
 import CarouselControl from './components/carousel/CarouselControl';
 import CarouselItem, { CarouselItemBlock } from './components/carousel/CarouselItem';
+import Video2, { Video2Block } from './components/video2/Video';
+import IFrame2, { IFrame2Block } from './components/video2/IFrame2';
+import YoutubeThumbnail, { YoutubeThumbnailBlock } from './components/video2/YoutubeThumbnail';
+import Modal from './components/modal/Modal';
+import YoutubePlayButton from './components/video2/YoutubePlayButton';
+import SwiperContainer, { SwiperContainerBlock } from './components/swiper/SwiperContainer';
+import SwiperWrapper from './components/swiper/SwiperWrapper';
+import SwiperPagination from './components/swiper/SwiperPagination';
+import SwiperSlide, { SwiperSlideBlock } from './components/swiper/SwiperSlide';
 
 import Default from './components/Default';
 
@@ -99,10 +106,21 @@ export default (editor, config = {}) => {
       Image(domc);
     }
 
-    if (blocks.video) {
-      Embed(domc);
-      VideoBlock(bm, c.labels.video);
-      Video(domc);
+    if (blocks.youtube_thumb) {
+      YoutubeThumbnailBlock(bm, c.labels.youtube_thumb);
+      YoutubeThumbnail(domc);
+      YoutubePlayButton(domc);
+      Modal(domc);
+    }
+
+    if (blocks.video2) {
+      Video2Block(bm, c.labels.video2);
+      Video2(domc);
+    }
+
+    if (blocks.iframe2) {
+      IFrame2Block(bm, c.labels.iframe2);
+      IFrame2(domc);
     }
   }
 
@@ -180,14 +198,6 @@ export default (editor, config = {}) => {
       AccordionBodyBlock(bm, c.labels.accordion_body);
       AccordionBody(domc);
     }
-
-    // if (blocks.tabs) {
-    //   // TabsBlock(bm, c);
-    //   // TabsNavigation(domc, config);
-    //   // Tab(domc, config);
-    //   // TabsPanes(domc, config);
-    //   // TabPane(domc, config);
-    // }
 
     // Badge
     if (blocks.badge) {
@@ -343,6 +353,17 @@ export default (editor, config = {}) => {
       CarouselItemBlock(bm, c.labels.carousel_item);
       CarouselItem(domc);
       CarouselControl(domc);
+    }
+  }
+
+  if (cats.swiper) {
+    if (blocks.swiper) {
+      SwiperContainerBlock(bm, c.labels.swiper_container);
+      SwiperContainer(domc);
+      SwiperWrapper(domc);
+      SwiperPagination(domc);
+      SwiperSlideBlock(bm, c.labels.swiper_slide);
+      SwiperSlide(domc);
     }
   }
 };

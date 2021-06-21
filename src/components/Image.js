@@ -41,15 +41,28 @@ export default (domComponent) => {
                         label: 'Alternate text',
                         name: 'alt'
                     }
-                ].concat(model.prototype.defaults.traits)
+                ].concat(model.prototype.defaults.traits),
             })
         }, {
-            isComponent: function(el) {
-                if(el && el.tagName === 'IMG') {
-                    return {type: type};
+            isComponent: function (el) {
+                if (el && el.tagName === 'IMG') {
+                    return { type: type };
                 }
             }
         }),
-        view: view
+        view: view.extend({
+            // init() {
+            //     this.listenTo(this.model, 'change:attributes:src', this.render)
+            //     this.listenTo(this.model, 'change:src', this.render)
+            // },
+            // render() {
+            //     console.log(this.model, this.model.get('attributes:src'), this.model.get('src'));
+            //     if (this.model.changed) {
+            //         this.el.src = this.model.changed.attributes.src;
+            //     }
+
+            //     return this;
+            // }
+        })
     });
 }

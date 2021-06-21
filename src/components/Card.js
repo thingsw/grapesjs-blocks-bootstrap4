@@ -83,16 +83,19 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
-        this.listenTo(this, 'change:card-img-top', this.cardImageTop);
-        this.listenTo(this, 'change:card-header', this.cardHeader);
-        this.listenTo(this, 'change:card-img', this.cardImage);
-        this.listenTo(this, 'change:card-img-overlay', this.cardImageOverlay);
-        this.listenTo(this, 'change:card-body', this.cardBody);
-        this.listenTo(this, 'change:card-footer', this.cardFooter);
-        this.listenTo(this, 'change:card-img-bottom', this.cardImageBottom);
-        this.components().comparator = 'card-order';
-        this.set('card-img-top', true);
-        this.set('card-body', true);
+        const children = this.components();
+        if (children.length === 0) {
+          this.listenTo(this, 'change:card-img-top', this.cardImageTop);
+          this.listenTo(this, 'change:card-header', this.cardHeader);
+          this.listenTo(this, 'change:card-img', this.cardImage);
+          this.listenTo(this, 'change:card-img-overlay', this.cardImageOverlay);
+          this.listenTo(this, 'change:card-body', this.cardBody);
+          this.listenTo(this, 'change:card-footer', this.cardFooter);
+          this.listenTo(this, 'change:card-img-bottom', this.cardImageBottom);
+          this.components().comparator = 'card-order';
+          this.set('card-img-top', true);
+          this.set('card-body', true);
+        }
       },
       cardImageTop() { this.createCardComponent('card-img-top'); },
       cardHeader() { this.createCardComponent('card-header'); },
@@ -103,18 +106,18 @@ export default (domc, editor) => {
       cardImageBottom() { this.createCardComponent('card-img-bottom'); },
       createCardComponent(prop) {
         const state = this.get(prop);
-        const type = prop.replace(/-/g,'_').replace(/img/g,'image')
+        const type = prop.replace(/-/g, '_').replace(/img/g, 'image')
         let children = this.components();
-        let existing = children.filter(function(comp) {
+        let existing = children.filter(function (comp) {
           return comp.attributes.type === type;
         })[0]; // should only be one of each.
 
-        if(state && !existing) {
+        if (state && !existing) {
           var comp = children.add({
             type: type
           });
           let comp_children = comp.components();
-          if(prop === 'card-header') {
+          if (prop === 'card-header') {
             comp_children.add({
               type: 'header',
               tagName: 'h4',
@@ -122,7 +125,7 @@ export default (domc, editor) => {
               content: 'Card Header'
             });
           }
-          if(prop === 'card-img-overlay') {
+          if (prop === 'card-img-overlay') {
             comp_children.add({
               type: 'header',
               tagName: 'h4',
@@ -136,7 +139,7 @@ export default (domc, editor) => {
               content: "Some quick example text to build on the card title and make up the bulk of the card's content."
             });
           }
-          if(prop === 'card-body') {
+          if (prop === 'card-body') {
             comp_children.add({
               type: 'header',
               tagName: 'h4',
@@ -178,8 +181,8 @@ export default (domc, editor) => {
       }
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card')) {
-          return {type: 'card'};
+        if (el && el.classList && el.classList.contains('card')) {
+          return { type: 'card' };
         }
       }
     }),
@@ -195,8 +198,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-img-top')) {
-          return {type: 'card_image_top'};
+        if (el && el.classList && el.classList.contains('card-img-top')) {
+          return { type: 'card_image_top' };
         }
       }
     }),
@@ -212,8 +215,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-header')) {
-          return {type: 'card_header'};
+        if (el && el.classList && el.classList.contains('card-header')) {
+          return { type: 'card_header' };
         }
       }
     }),
@@ -229,8 +232,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-img')) {
-          return {type: 'card_image'};
+        if (el && el.classList && el.classList.contains('card-img')) {
+          return { type: 'card_image' };
         }
       }
     }),
@@ -246,8 +249,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-img-overlay')) {
-          return {type: 'card_image_overlay'};
+        if (el && el.classList && el.classList.contains('card-img-overlay')) {
+          return { type: 'card_image_overlay' };
         }
       }
     }),
@@ -263,8 +266,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-body')) {
-          return {type: 'card_body'};
+        if (el && el.classList && el.classList.contains('card-body')) {
+          return { type: 'card_body' };
         }
       }
     }),
@@ -280,8 +283,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-footer')) {
-          return {type: 'card_footer'};
+        if (el && el.classList && el.classList.contains('card-footer')) {
+          return { type: 'card_footer' };
         }
       }
     }),
@@ -297,8 +300,8 @@ export default (domc, editor) => {
       })
     }, {
       isComponent(el) {
-        if(el && el.classList && el.classList.contains('card-img-bottom')) {
-          return {type: 'card_image_bottom'};
+        if (el && el.classList && el.classList.contains('card-img-bottom')) {
+          return { type: 'card_image_bottom' };
         }
       }
     }),
@@ -315,9 +318,9 @@ export default (domc, editor) => {
           {
             type: 'class_select',
             options: [
-              {value: 'card-group', name: 'Group'},
-              {value: 'card-deck', name: 'Deck'},
-              {value: 'card-columns', name: 'Columns'},
+              { value: 'card-group', name: 'Group' },
+              { value: 'card-deck', name: 'Deck' },
+              { value: 'card-columns', name: 'Columns' },
             ],
             label: 'Layout',
           }
@@ -326,11 +329,11 @@ export default (domc, editor) => {
     }, {
       isComponent(el) {
         const css = Array.from(el.classList || []);
-        const includes = ['card-group','card-deck','card-columns'];
+        const includes = ['card-group', 'card-deck', 'card-columns'];
         const intersection = css.filter(x => includes.includes(x));
 
-        if(el && el.classList && intersection.length) {
-          return {type: 'card_container'};
+        if (el && el.classList && intersection.length) {
+          return { type: 'card_container' };
         }
       }
     }),
