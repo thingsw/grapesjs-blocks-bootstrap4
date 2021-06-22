@@ -56,6 +56,7 @@ import SwiperContainer, { SwiperContainerBlock } from './components/swiper/Swipe
 import SwiperWrapper from './components/swiper/SwiperWrapper';
 import SwiperPagination from './components/swiper/SwiperPagination';
 import SwiperSlide, { SwiperSlideBlock } from './components/swiper/SwiperSlide';
+import Timeline, { TimelineBlock } from './components/timeline/Timeline';
 
 import Default from './components/Default';
 
@@ -221,6 +222,11 @@ export default (editor, config = {}) => {
     if (blocks.dropdown) {
       DropDownBlock(bm, c.labels.dropdown);
       Dropdown(editor);
+    }
+    // Timeline
+    if (blocks.timeline) {
+      TimelineBlock(bm);
+      Timeline(domc);
     }
   }
 

@@ -59,8 +59,8 @@ export default (editor) => {
                         label: 'Initial state',
                         name: 'initial_state',
                         options: [
-                            {value: '', name: 'Closed'},
-                            {value: 'show', name: 'Open'}
+                            { value: '', name: 'Closed' },
+                            { value: 'show', name: 'Open' }
                         ],
                     }
                 ].concat(defaultModel.prototype.defaults.traits),
@@ -77,7 +77,7 @@ export default (editor) => {
                     type: 'dropdown_menu'
                 };
                 const menu_comp = this.append(menu)[0];
-                this.setupToggle(null, null, {force: true});
+                this.setupToggle(null, null, { force: true });
                 const comps = this.components();
                 comps.bind('add', this.setupToggle.bind(this));
                 comps.bind('remove', this.setupToggle.bind(this));
@@ -88,8 +88,8 @@ export default (editor) => {
             },
 
             setupToggle(a, b, options = {}) {
-                const toggle = this.components().filter(c => c.getAttributes().class.split(' ').includes('dropdown-toggle'))[0];
-                const menu = this.components().filter(c => c.getAttributes().class.split(' ').includes('dropdown-menu'))[0];
+                const toggle = this.components().filter(c => c.getAttributes().class?.split(' ').includes('dropdown-toggle'))[0];
+                const menu = this.components().filter(c => c.getAttributes().class?.split(' ').includes('dropdown-menu'))[0];
 
                 if (options.force !== true && options.ignore === true) {
                     return;
@@ -116,7 +116,7 @@ export default (editor) => {
                         toggle_attrs['aria-haspopup'] = true;
                     }
 
-                    toggle.set('attributes', toggle_attrs, {ignore: true});
+                    toggle.set('attributes', toggle_attrs, { ignore: true });
 
                     // setup menu
                     // toggle needs ID for aria-labelled on the menu, could alert here
@@ -125,17 +125,17 @@ export default (editor) => {
                     } else {
                         delete menu_attrs['aria-labelledby'];
                     }
-                    menu.set('attributes', menu_attrs, {ignore: true});
+                    menu.set('attributes', menu_attrs, { ignore: true });
                 }
             },
 
             updated(property, value) {
-                if(value.hasOwnProperty('initial_state')) {
+                if (value.hasOwnProperty('initial_state')) {
                     const menu = this.components().filter(c => c.getAttributes().class.split(' ').includes('dropdown-menu'))[0];
                     const attrs = menu.getAttributes();
                     const classes = attrs.class.split(' ');
 
-                    if(classes.includes('show')) {
+                    if (classes.includes('show')) {
                         // Close the menu
                         attrs['aria-expanded'] = false;
                         menu.removeClass('show');
@@ -150,7 +150,7 @@ export default (editor) => {
         }, {
             isComponent(el) {
                 if (el && el.classList && el.classList.contains('dropdown')) {
-                    return {type: 'dropdown'};
+                    return { type: 'dropdown' };
                 }
             }
         }),
@@ -191,7 +191,7 @@ export default (editor) => {
         }, {
             isComponent(el) {
                 if (el && el.classList && el.classList.contains('dropdown-menu')) {
-                    return {type: 'dropdown_menu'};
+                    return { type: 'dropdown_menu' };
                 }
             }
         }),

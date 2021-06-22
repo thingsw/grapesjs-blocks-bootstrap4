@@ -45,7 +45,7 @@ module.exports = (env = {}) => {
                 },
             ],
         },
-        externals: {'grapesjs': 'grapesjs'},
+        externals: { 'grapesjs': 'grapesjs' },
         optimization: optimization,
         plugins: plugins,
         watchOptions: {

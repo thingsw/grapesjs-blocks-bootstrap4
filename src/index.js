@@ -19,6 +19,10 @@ const loadCss = editor => {
       height: 1.5rem !important;
     }
 
+    .gjs-dashed [class^="timeline-"] > div {
+      min-height: 1.5rem !important;
+    }
+
     .gjs-dashed .carousel.show .carousel-item {
       display: block;
       margin-right: 0;
@@ -112,6 +116,7 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     video2: true,
     iframe2: true,
     youtube_thumb: true,
+    timeline: true,
     // TYPOGRAPHY
     header: true,
     paragraph: true,
