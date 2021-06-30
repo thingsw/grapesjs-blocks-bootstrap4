@@ -57,6 +57,9 @@ import SwiperWrapper from './components/swiper/SwiperWrapper';
 import SwiperPagination from './components/swiper/SwiperPagination';
 import SwiperSlide, { SwiperSlideBlock } from './components/swiper/SwiperSlide';
 import Timeline, { TimelineBlock } from './components/timeline/Timeline';
+import File, { FileBlock } from './components/files/File';
+import Category, { CategoryBlock } from './components/files/Category';
+import PageLoader, { PageLoaderBlock } from './components/page/PageLoader';
 
 import Default from './components/Default';
 
@@ -228,6 +231,8 @@ export default (editor, config = {}) => {
       TimelineBlock(bm);
       Timeline(domc);
     }
+    PageLoaderBlock(bm);
+    PageLoader(domc, c.serverUri);
   }
 
   // TYPOGRAPHY
@@ -371,5 +376,12 @@ export default (editor, config = {}) => {
       SwiperSlideBlock(bm, c.labels.swiper_slide);
       SwiperSlide(domc);
     }
+  }
+
+  if (cats.files) {
+    FileBlock(bm);
+    File(domc, c.serverUri);
+    CategoryBlock(bm);
+    Category(domc, c.serverUri);
   }
 };

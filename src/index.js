@@ -18,8 +18,16 @@ const loadCss = editor => {
     .gjs-dashed [class^="table-"] > div {
       height: 1.5rem !important;
     }
+    .gjs-dashed .page-loader, 
+    .gjs-dashed .files-category {
+      min-height: 1.5rem !important;
+    }
 
     .gjs-dashed [class^="timeline-"] > div {
+      min-height: 1.5rem !important;
+    }
+
+    .gjs-dashed .files-file {
       min-height: 1.5rem !important;
     }
 
@@ -259,6 +267,7 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     tabs: true,
     carousel: true,
     swiper: true,
+    files: true,
   };
 
   let options = {
