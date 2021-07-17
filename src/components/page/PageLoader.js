@@ -49,7 +49,6 @@ const PageLoader = (domc, serverUri) => {
         // `this` is bound to the component element
         const pageId = this.getAttribute('data-page-id');
         const serverUri = this.getAttribute('data-server-uri');
-        console.log("serverUri", serverUri);
         function LoadPage(id, el) {
           fetch(`${serverUri}/fulfillment/api/graphql`, {
             method: 'POST',
