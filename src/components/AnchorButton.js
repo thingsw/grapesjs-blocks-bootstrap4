@@ -40,6 +40,11 @@ export default (editor) => {
             name: 'href',
           },
           {
+            type: 'text',
+            label: 'Target',
+            name: 'target',
+          },
+          {
             type: 'class_select',
             options: [
               { value: '', name: 'None' },

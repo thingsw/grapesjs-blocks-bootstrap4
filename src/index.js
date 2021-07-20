@@ -100,6 +100,7 @@ export default grapesjs.plugins.add('grapesjs-blocks-bootstrap4', (editor, opts 
     text: true,
     link: true,
     image: true,
+    image_loop: true,
     // LAYOUT
     container: true,
     row: true,

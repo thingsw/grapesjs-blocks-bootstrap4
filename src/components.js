@@ -15,6 +15,7 @@ import Label, { LabelBlock } from './components/Label';
 import Link, { LinkBlock } from './components/Link';
 import FileInput, { FileInputBlock } from './components/FileInput';
 import Image, { ImageBlock } from './components/Image';
+import ImageLoop, { ImageLoopBlock } from './components/image-loop/ImageLoop';
 import Paragraph, { ParagraphBlock } from './components/Paragraph';
 import Header, { HeaderBlock } from './components/Header';
 import Card, { CardBlock } from './components/Card';
@@ -108,6 +109,10 @@ export default (editor, config = {}) => {
     if (blocks.image) {
       ImageBlock(bm, c.labels.image);
       Image(domc);
+    }
+    if (blocks.image_loop) {
+      ImageLoopBlock(bm);
+      ImageLoop(domc);
     }
 
     if (blocks.youtube_thumb) {
